@@ -4,8 +4,8 @@ import time
 import datetime
 import threading
 import random
-import asyncio
-import schedule
+# import asyncio
+# import schedule
 
 """
 _logoMsg = "*VK201580000000000000,AB#"
@@ -16,15 +16,14 @@ _helloMsg = "*VK201580000000000000,AH#"
 
 
 class mythread(threading.Thread, object):
-
-    #server = "192.168.2.181"
-    #port = 9876
+    # server = "192.168.2.181"
+    # port = 9876
 
     server = "192.168.30.97"
     port = 8080
 
-    #server = "183.62.157.202"
-    #port = 20243
+    # server = "183.62.157.202"
+    # port = 20243
 
     randmDurLogin = 10  # 随机10秒
 
@@ -134,11 +133,11 @@ class mythread(threading.Thread, object):
 
     def printl(self, msg, printLevel=0):
         if self.DEBUG or printLevel >= self.LOGLEVEL:
-            #print("%s %s %s" % (self.getCurrentTimef(), self.imei, msg))
+            # print("%s %s %s" % (self.getCurrentTimef(), self.imei, msg))
             print("%s %s %s" % (self.getCurrentTimef(), self.imei, msg))
-            #print("%s %s" % (self.imei, msg))
-    
-    def shut(self, sec = 30):
+            # print("%s %s" % (self.imei, msg))
+
+    def shut(self, sec=30):
         self.printl('{}秒到，我要关机了...'.format(sec))
         try:
             self.powerOff = True
@@ -149,15 +148,16 @@ class mythread(threading.Thread, object):
             pass
 
     def log(self):
-        self.printl('terTotal:{:<5d} connected:{:<5d} login:{:<5d} retray:{:<5d} RECIEVE_TOTAL:{:<5d} NEED_ANSWER:{:<5d} ack:{:<5d} -> {}'.format(
-            mythread.TOTAL,
-            mythread.CONNECTED,
-            mythread.LOGIN,
-            mythread.RETRAY,
-            mythread.RECIEVE_CMD_TOTAL,
-            mythread.RECIEVE_CMD_NEED_ANSWER,
-            mythread.ANSWER_CMD_TOTAL,
-            (self.recieveTime - self.sendLoginTime).total_seconds()), 3)
+        self.printl(
+            'terTotal:{:<5d} connected:{:<5d} login:{:<5d} retray:{:<5d} RECIEVE_TOTAL:{:<5d} NEED_ANSWER:{:<5d} ack:{:<5d} -> {}'.format(
+                mythread.TOTAL,
+                mythread.CONNECTED,
+                mythread.LOGIN,
+                mythread.RETRAY,
+                mythread.RECIEVE_CMD_TOTAL,
+                mythread.RECIEVE_CMD_NEED_ANSWER,
+                mythread.ANSWER_CMD_TOTAL,
+                (self.recieveTime - self.sendLoginTime).total_seconds()), 3)
 
     def sayHello(self):
         helloMsg = "*VK201{},AH&A1450172236915411403232860012290518&V1000000000000&B0100000000&W00&G000030&M350&N21&O1400#".format(
@@ -344,8 +344,8 @@ if __name__ == "__main__":
     threadLock = threading.Lock()
     for imei in imeis:
         threads.append(mythread(imei, mythread.server, mythread.port))
-    
-    #threads.append(myPrint)
+
+    # threads.append(myPrint)
 
     for t in threads:
         t.start()
